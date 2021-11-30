@@ -1,0 +1,33 @@
+{% extends 'catalogapp/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="card mt-3 mb-5">
+        <div class="col-3"></div>
+        <a class="w-100 btn btn-lg btn-primary" type="button" href="#">Добавить товар</a>
+        <div class="col-3"></div>
+        <table class="table table-striped mt-5">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Название</th>
+                <th scope="col">Цена</th>
+                <th scope="col">Количество</th>
+                <th scope="col">Поставщик</th>
+                <th scope="col">Дата поступления</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in object_list %}
+                <tr>
+                    <th scope="row">{{ item.pk }}</th>
+                    <td>{{ item.product_name }}</td>
+                    <td>{{ item.price }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.supplier_name }}</td>
+                    <td>{{ item.added|date:"Y-m-d H:i:s" }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
