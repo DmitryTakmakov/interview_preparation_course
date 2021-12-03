@@ -1,0 +1,13 @@
+<nav class="navbar">
+    <div class="navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            {% for item in all_cats %}
+                <li class="nav-item">
+                    <a href="{% url 'catalogapp:category' item.pk %}" class="nav-link">
+                        {{ item }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</nav>
