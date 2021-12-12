@@ -1,0 +1,33 @@
+version: '3.1'
+
+services:
+  db:
+    image: postgres:13.4
+    privileged: true
+    restart: always
+    ports:
+      - "54322:5432"
+    environment:
+      POSTGRES_USER: django
+      POSTGRES_PASSWORD: qwerty123
+      POSTGRES_DB: django_db
+  backend:
+    build:
+      context: ./interview_course
+    ports:
+      - "8080:8080"
+    command: bash -c "
+      export DJANGO_SETTINGS_MODULE=settings.settings.local
+      && python manage.py migrate
+      && gunicorn settings.wsgi -b 0.0.0.0:8080
+      "
+    depends_on:
+      - db
+
+  nginx:
+    build:
+      context: ./nginx
+    ports:
+      - "8000:8000"
+    depends_on:
+      - backend
