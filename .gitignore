@@ -21,4 +21,5 @@ urls.txt
 /node_modules
 /.pnp
 .pnp.js
+/static/
 /static/admin/
